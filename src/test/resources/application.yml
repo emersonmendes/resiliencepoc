@@ -1,0 +1,16 @@
+resilience4j.retry:
+  instances:
+    contributors:
+      maxAttempts: 2
+      waitDuration: 100ms
+      retryExceptions:
+        - br.com.emersonmendes.resiliencepoc.GitHubException
+    contributors-prog:
+      maxAttempts: 2
+      waitDuration: 100ms
+      retryExceptions:
+        - br.com.emersonmendes.resiliencepoc.GitHubException
+spring:
+  main:
+    allow-bean-definition-overriding: true
+    lazy-initialization: true
