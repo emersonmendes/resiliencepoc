@@ -11,11 +11,9 @@ import org.springframework.boot.autoconfigure.ImportAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.EnableAspectJAutoProxy
 import org.springframework.context.annotation.Import
-import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.TestConstructor
 import org.springframework.test.context.TestConstructor.AutowireMode.ALL
 
-@ActiveProfiles("test")
 @TestConstructor( autowireMode = ALL )
 @SpringBootTest(classes = [GitHubServiceTestConfiguration::class])
 internal class GitHubServiceTest(
