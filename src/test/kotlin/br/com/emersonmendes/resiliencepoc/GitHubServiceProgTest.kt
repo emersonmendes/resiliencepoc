@@ -13,8 +13,8 @@ import org.springframework.test.context.TestConstructor.AutowireMode.ALL
 @SpringBootTest
 @TestConstructor( autowireMode = ALL )
 internal class GitHubServiceProgTest(
-        private val gitHubServiceProg: GitHubServiceProg,
-        private val retryRegistry: RetryRegistry
+    private val gitHubServiceProg: GitHubServiceProg,
+    private val retryRegistry: RetryRegistry
 ) {
 
     @Test
