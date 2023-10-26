@@ -30,7 +30,7 @@ class GitHubService {
         val timeout = Duration.ofSeconds(5).toMillis()
         return Feign.builder()
             .client(feign.okhttp.OkHttpClient())
-            .decode404()
+            .dismiss404()
             .decoder(GsonDecoder())
             .logger(Slf4jLogger(javaClass.canonicalName))
             .logLevel(Logger.Level.FULL)

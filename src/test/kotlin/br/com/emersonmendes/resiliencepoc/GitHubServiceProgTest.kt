@@ -22,11 +22,11 @@ internal class GitHubServiceProgTest(
         assertThat(retryRegistry).isNotNull
         assertThat(retryRegistry.allRetries.count()).isEqualTo(2)
         assertThat(
-            retryRegistry.allRetries.asJava().stream()
+            retryRegistry.allRetries.stream()
                 .map { it.name }
                 .anyMatch { it == "contributors-prog" }
         ).isTrue
-        assertThat(retryRegistry.allRetries.asJava().stream().map { it.retryConfig.maxAttempts }
+        assertThat(retryRegistry.allRetries.stream().map { it.retryConfig.maxAttempts }
             .findAny().get()).isEqualTo(2)
     }
 

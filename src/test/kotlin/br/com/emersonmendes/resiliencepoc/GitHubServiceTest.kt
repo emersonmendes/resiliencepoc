@@ -3,7 +3,7 @@ package br.com.emersonmendes.resiliencepoc
 import io.github.logrecorder.api.LogRecord
 import io.github.logrecorder.logback.junit5.RecordLoggers
 import io.github.resilience4j.retry.RetryRegistry
-import io.github.resilience4j.retry.autoconfigure.RetryAutoConfiguration
+import io.github.resilience4j.springboot3.retry.autoconfigure.RetryAutoConfiguration
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
@@ -26,11 +26,11 @@ internal class GitHubServiceTest(
         assertThat(retryRegistry).isNotNull
         assertThat(retryRegistry.allRetries.count()).isEqualTo(2)
         assertThat(
-            retryRegistry.allRetries.asJava().stream()
+            retryRegistry.allRetries.stream()
                 .map { it.name }
                 .anyMatch { it == "contributors" }
         ).isTrue
-        assertThat(retryRegistry.allRetries.asJava().stream().map { it.retryConfig.maxAttempts }
+        assertThat(retryRegistry.allRetries.stream().map { it.retryConfig.maxAttempts }
             .findAny().get()).isEqualTo(2)
     }
 
