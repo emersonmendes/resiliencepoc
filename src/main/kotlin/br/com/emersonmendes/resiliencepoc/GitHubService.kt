@@ -9,11 +9,11 @@ import java.time.Duration
 import java.util.concurrent.TimeUnit
 
 @Service
+@Retry(name = "contributors")
 class GitHubService {
 
     private val feignClient = createFeignClient()
 
-    @Retry(name = "contributors")
     fun getGithubContributors(): Boolean {
         try {
             val contributors: List<Contributor> = feignClient.getContributors("OpenFeign", "feign")
