@@ -3,15 +3,21 @@ package br.com.emersonmendes.resiliencepoc
 import io.github.logrecorder.api.LogRecord
 import io.github.logrecorder.logback.junit5.RecordLoggers
 import io.github.resilience4j.retry.RetryRegistry
+import io.github.resilience4j.retry.autoconfigure.RetryAutoConfiguration
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.annotation.EnableAspectJAutoProxy
+import org.springframework.context.annotation.Import
+import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.TestConstructor
 import org.springframework.test.context.TestConstructor.AutowireMode.ALL
 
-@SpringBootTest
+@ActiveProfiles("test")
 @TestConstructor( autowireMode = ALL )
+@SpringBootTest(classes = [GitHubServiceTestConfiguration::class])
 internal class GitHubServiceTest(
     private val gitHubService: GitHubService,
     private val retryRegistry: RetryRegistry
@@ -40,3 +46,8 @@ internal class GitHubServiceTest(
     }
 
 }
+
+@EnableAspectJAutoProxy
+@ImportAutoConfiguration(RetryAutoConfiguration::class)
+@Import(GitHubService::class)
+private class GitHubServiceTestConfiguration
